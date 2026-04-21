@@ -1,0 +1,38 @@
+{
+  "name": "novel_content_writer",
+  "description": "Writes full web novel content based on outlines, chapter plans, and design documents. Generates engaging chapters with proper pacing, excitement points, and reader hooks. Invoke when user needs novel content generation, chapter writing, or full text drafting.",
+  "instructions": [
+    "Generate chapter content following the provided outline and design specifications",
+    "Maintain consistent character voices and personalities throughout",
+    "Implement proper pacing with well-timed excitement points",
+    "Ensure each chapter ends with a hook to encourage continued reading",
+    "Follow web novel writing conventions and reader expectations for the chosen genre"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "outline": {
+        "type": "string",
+        "description": "大纲文件路径或JSON数据"
+      },
+      "design_plan": {
+        "type": "string",
+        "description": "设计方案文件路径或JSON数据"
+      },
+      "chapter_range": {
+        "type": "string",
+        "description": "章节范围，如'1-10'"
+      },
+      "style": {
+        "type": "string",
+        "enum": ["快节奏", "平衡", "细腻"],
+        "description": "写作风格"
+      },
+      "word_count": {
+        "type": "integer",
+        "description": "每章字数，默认2000"
+      }
+    },
+    "required": ["outline", "chapter_range"]
+  }
+}

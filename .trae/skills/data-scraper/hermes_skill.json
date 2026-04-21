@@ -1,0 +1,34 @@
+{
+  "name": "novel_data_scraper",
+  "description": "Scrapes web novel platform data including trending novels, ranking lists, reader demographics, and market trends. Invoke when user needs platform data collection, market research, or trending novel analysis.",
+  "instructions": [
+    "Analyze the user's request to determine which platforms and data types to scrape",
+    "Use appropriate scraping methods to collect data from specified platforms",
+    "Clean and standardize the collected data",
+    "Return structured JSON data with platform statistics and trend analysis",
+    "Respect platform terms of service and implement rate limiting"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["起点中文网", "番茄小说", "七猫小说", "纵横中文网", "晋江文学城", "潇湘书院"]
+        },
+        "description": "目标平台列表"
+      },
+      "data_type": {
+        "type": "string",
+        "enum": ["榜单数据", "趋势分析", "全量数据", "读者画像"],
+        "description": "要抓取的数据类型"
+      },
+      "limit": {
+        "type": "integer",
+        "description": "抓取数量限制，默认100"
+      }
+    },
+    "required": ["platforms", "data_type"]
+  }
+}

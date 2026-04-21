@@ -1,0 +1,37 @@
+{
+  "name": "novel_content_auditor",
+  "description": "Audits web novel content for quality, consistency, pacing, excitement points, and reader engagement. Detects issues like plot holes, character inconsistencies, and pacing problems. Invoke when user needs content review, quality check, or story consistency audit.",
+  "instructions": [
+    "Analyze the provided content for plot consistency and timeline continuity",
+    "Check character behavior consistency with established personality traits",
+    "Evaluate pacing and excitement point distribution",
+    "Identify potential plot holes or logical inconsistencies",
+    "Generate detailed audit report with specific issues and suggested fixes"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "chapters": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        },
+        "description": "要审计的章节号列表"
+      },
+      "audit_type": {
+        "type": "string",
+        "enum": ["全维度", "情节审计", "人物审计", "节奏审计", "设定审计"],
+        "description": "审计类型"
+      },
+      "focus_on": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["情节连贯性", "人物一致性", "节奏合理性", "爽点分布", "设定一致性"]
+        },
+        "description": "重点关注的审计维度"
+      }
+    },
+    "required": ["chapters"]
+  }
+}

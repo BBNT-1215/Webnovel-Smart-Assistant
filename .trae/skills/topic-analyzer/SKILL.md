@@ -7,7 +7,7 @@ description: "Analyzes web novel market data to identify trending topics, track 
 
 ## 功能概述
 
-本 skill 基于平台抓取数据，深度分析各赛道热门趋势、竞争格局、读者需求，为创作者提供精准的选题方向和赛道建议。
+本 skill 基于市场数据，深度分析各赛道热门趋势、竞争格局、读者需求，为创作者提供精准的选题方向和赛道建议。
 
 ## 触发条件
 
@@ -15,7 +15,7 @@ description: "Analyzes web novel market data to identify trending topics, track 
 - 需要确定小说题材方向
 - 需要评估赛道竞争程度
 - 需要发现蓝海市场机会
-- 工作流接收到数据抓取结果后自动触发
+- 工作流接收到市场数据后自动触发
 
 ## 分析维度
 
@@ -118,10 +118,10 @@ description: "Analyzes web novel market data to identify trending topics, track 
 ## 使用方式
 
 ```
-/topic-analyzer --track 都市 --analysis-type 全维度分析
-/topic-analyzer --data-source 抓取数据.json --output-format 报告
-/topic-analyzer --compare-tracks 都市,玄幻,仙侠
-/topic-analyzer --blue-ocean --top-n 5
+skill_view(topic-analyzer) --track 都市 --analysis-type 全维度分析
+skill_view(topic-analyzer) --data-source 抓取数据.json --output-format 报告
+skill_view(topic-analyzer) --compare-tracks 都市,玄幻,仙侠
+skill_view(topic-analyzer) --blue-ocean --top-n 5
 ```
 
 ## 分析策略

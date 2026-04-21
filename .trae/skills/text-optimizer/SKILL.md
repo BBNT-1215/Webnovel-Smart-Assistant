@@ -242,10 +242,10 @@ description: "Optimizes web novel text for readability, pacing, excitement, and 
 ## 使用方式
 
 ```
-/text-optimizer --chapter 15 --level 中度优化
-/text-optimizer --input 章节内容.txt --output 优化后.txt
-/text-optimizer --audit-report 审计报告.json --auto-fix
-/text-optimizer --focus 爽点强化 --chapters 1-10
+skill_view(text-optimizer) --chapter 15 --level 中度优化
+skill_view(text-optimizer) --input 章节内容.txt --output 优化后.txt
+skill_view(text-optimizer) --audit-report 审计报告.json --auto-fix
+skill_view(text-optimizer) --focus 爽点强化 --chapters 1-10
 ```
 
 ## 优化原则

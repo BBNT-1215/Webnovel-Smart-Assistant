@@ -1,9 +1,12 @@
 # 爆款网文创作全流程自动化工作流
 
+> **项目说明**: 本项目是一套**工作流设计文档**，包含 Trae Agent 技能定义文件（SKILL.md），而非可直接执行的代码项目。
+> 旨在为网文创作者提供从市场分析到内容创作的全流程方法论指导。
+
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.0.0-blue" alt="Version">
-  <img src="https://img.shields.io/badge/python-3.8+-green" alt="Python">
-  <img src="https://img.shields.io/badge/license-MIT-orange" alt="License">
+  <img src="https://img.shields.io/badge/type-Design%20Document-orange" alt="Type">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
 ## 📖 项目简介
@@ -74,46 +77,24 @@
 
 ## 🚀 快速开始
 
-### 安装
-
-```bash
-# 克隆项目
-git clone https://github.com/BBNT-1215/Webnovel-Smart-Assistant.git
-cd Webnovel-Smart-Assistant
-
-# 安装依赖
-pip install -r requirements.txt
-```
-
 ### 使用方式
 
-#### 1. 完整工作流（推荐）
-```bash
-/novel-workflow --mode semi-auto --platforms 起点,番茄 --track 都市 --volumes 2
+> **注意**: 本项目为设计文档，非可执行代码。以下为 Trae Agent 中调用 skill 的方式说明。
+
+#### 1. 在 Trae Agent 中使用
+```
+skill_view(novel-workflow) --mode semi-auto --platforms 起点,番茄 --track 都市 --volumes 2
 ```
 
-#### 2. 分步执行
-```bash
-# 步骤1：数据抓取
-/data-scraper --platforms 起点,番茄,七猫 --data-type 全量数据
-
-# 步骤2：选题分析
-/topic-analyzer --data-source 平台数据.json --output-format 选题报告
-
-# 步骤3：全维度设计
-/design-planner --input 选题报告.json --track 都市
-
-# 步骤4：大纲规划
-/outline-planner --design 设计方案.json --volumes 2
-
-# 步骤5：正文撰写
-/content-writer --outline 大纲.json --chapter-range 1-50
-
-# 步骤6：内容审计
-/content-auditor --chapters 1-50 --audit-type 全维度
-
-# 步骤7：文字优化
-/text-optimizer --chapters 1-50 --audit-report 审计报告.json --level 中度优化
+#### 2. 分步调用
+```
+skill_view(data-scraper) --platforms 起点,番茄,七猫 --data-type 全量数据
+skill_view(topic-analyzer) --data-source 平台数据.json --output-format 选题报告
+skill_view(design-planner) --input 选题报告.json --track 都市
+skill_view(outline-planner) --design 设计方案.json --volumes 2
+skill_view(content-writer) --outline 大纲.json --chapter-range 1-50
+skill_view(content-auditor) --chapters 1-50 --audit-type 全维度
+skill_view(text-optimizer) --chapters 1-50 --audit-report 审计报告.json --level 中度优化
 ```
 
 ## 📚 文档
@@ -216,6 +197,30 @@ Webnovel-Smart-Assistant/
 ## 📄 许可证
 
 MIT License
+
+## ⚠️ 局限性说明
+
+> **重要**：在使用本项目前，请了解以下局限性：
+
+### 1. 项目性质
+- 本项目是**工作流设计文档**，不包含可执行代码
+- 技能定义文件（SKILL.md）为 Trae Agent 提供方法论指导
+- 实际效果取决于所使用的 LLM API 质量和提示词工程
+
+### 2. 数据源限制
+- 起点、番茄、七猫等平台有严格的反爬机制
+- 实际可获取的数据非常有限
+- 建议通过官方公开排行榜、行业报告等合法方式获取市场数据
+
+### 3. API 批量生成限制
+- LLM API 有速率限制，批量生成需控制请求频率
+- 长文本生成时可能存在主角名漂移、设定不一致等问题
+- 建议每章单独调用 API，并定期检一致性
+
+### 4. 内容质量
+- AI 生成的内容需要**人工深度润色**才能达到发布标准
+- 读者只在乎内容好不好看，不在乎是否为 AI 生成
+- 本项目关注可读性评分，而非"AI痕迹检测"
 
 ## 👤 作者
 

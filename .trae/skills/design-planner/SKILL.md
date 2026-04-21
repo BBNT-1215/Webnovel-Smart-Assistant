@@ -180,10 +180,10 @@ description: "Creates comprehensive design checklists for web novels including c
 ## 使用方式
 
 ```
-/design-planner --track 都市异能 --protagonist-name 林辰
-/design-planner --input 选题分析.json --output 设计方案.json
-/design-planner --focus 人物设计 --track 玄幻
-/design-planner --focus 世界观 --world-type 异世界
+skill_view(design-planner) --track 都市异能 --protagonist-name 林辰
+skill_view(design-planner) --input 选题分析.json --output 设计方案.json
+skill_view(design-planner) --focus 人物设计 --track 玄幻
+skill_view(design-planner) --focus 世界观 --world-type 异世界
 ```
 
 ## 设计原则

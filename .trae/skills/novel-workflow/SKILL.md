@@ -209,7 +209,7 @@ while (任一维度评分未达标) {
 
 ### 1. 全自动模式
 ```
-/novel-workflow --mode auto --platforms 起点,番茄 --volumes 3 --chapters-per-volume 100
+skill_view(novel-workflow) --mode auto --platforms 起点,番茄 --volumes 3 --chapters-per-volume 100
 ```
 - 所有阶段自动执行
 - 使用默认配置
@@ -217,7 +217,7 @@ while (任一维度评分未达标) {
 
 ### 2. 半自动模式（推荐）
 ```
-/novel-workflow --mode semi-auto --platforms 起点 --volumes 2
+skill_view(novel-workflow) --mode semi-auto --platforms 起点 --volumes 2
 ```
 - 关键节点暂停等待用户确认
 - 确认点：选题选择、设计方案、大纲确认
@@ -225,7 +225,7 @@ while (任一维度评分未达标) {
 
 ### 3. 手动模式
 ```
-/novel-workflow --mode manual --step 3
+skill_view(novel-workflow) --mode manual --step 3
 ```
 - 用户手动触发每个skill
 - 工作流仅做编排和进度管理
@@ -233,7 +233,7 @@ while (任一维度评分未达标) {
 
 ### 4. 增量模式
 ```
-/novel-workflow --mode incremental --continue-from chapter 50
+skill_view(novel-workflow) --mode incremental --continue-from chapter 50
 ```
 - 从指定章节继续生成
 - 保持已有内容不变
@@ -432,22 +432,68 @@ output/
 
 ### 场景1: 快速启动一部小说
 ```
-/novel-workflow --quick-start --track 都市异能 --volumes 2 --chapters 200
+skill_view(novel-workflow) --quick-start --track 都市异能 --volumes 2 --chapters 200
 ```
 
 ### 场景2: 精细化创作
 ```
-/novel-workflow --mode semi-auto --platforms 起点,番茄 --volumes 5 --review-each-step
+skill_view(novel-workflow) --mode semi-auto --platforms 起点,番茄 --volumes 5 --review-each-step
 ```
 
 ### 场景3: 批量生成
 ```
-/novel-workflow --batch --tracks 都市,玄幻,仙侠 --volumes 3 --auto-publish
+skill_view(novel-workflow) --batch --tracks 都市,玄幻,仙侠 --volumes 3 --auto-publish
 ```
 
 ### 场景4: 连载更新
 ```
-/novel-workflow --mode incremental --continue-from last-chapter --new-chapters 50
+skill_view(novel-workflow) --mode incremental --continue-from last-chapter --new-chapters 50
+```
+
+## API批量调用策略（实际使用必读）
+
+### 1. 长输出稳定性控制
+- **分章生成**: 不要尝试一次API调用生成多章，每章单独调用
+- **字数控制**: 每章 2000-3000 字，通过 `max_new_tokens` 参数限制
+- **上下文窗口**: 生成新章时，带上前2-3章内容作为上下文
+- **温度设置**: 使用 temperature=0.7-0.8 平衡创造性和一致性
+
+### 2. 主角名漂移问题
+- **人物卡片**: 维护主角姓名、性格、外貌特征
+- **系统提示词**: 每次生成都在 system prompt 中包含主角信息
+- **定期检查**: 每生成 10 章检查一次主角名是否正确
+- **修正机制**: 发现漂移时，重新生成该章
+
+### 3. API速率限制处理
+- **请求间隔**: 每两次请求间隔 2-5 秒
+- **并发控制**: 最多 3 个并发请求
+- **指数退避**: 遇到限速时，按 1s → 2s → 4s → 8s 递增重试
+- **配额管理**: 记录每日API调用量，避免超出限额
+
+### 4. 设定一致性维护
+- **设定文档**: 维护世界观、力量体系、金手指规则
+- **上下文摘要**: 每生成 30 章重新生成设定摘要
+- **关键信息注入**: 每次生成时将关键设定注入提示词
+- **版本控制**: 设定变更时记录版本，确保前后一致
+
+### 5. 批量生成工作流
+```
+for chapter in range(1, total_chapters):
+    # 1. 构建上下文（前2章 + 本章大纲 + 人物卡片）
+    context = build_context(chapter)
+    
+    # 2. 调用API生成
+    result = api_call(context, max_tokens=3000, temperature=0.7)
+    
+    # 3. 保存结果
+    save_chapter(chapter, result)
+    
+    # 4. 延迟 2-5 秒
+    sleep(random.uniform(2, 5))
+    
+    # 5. 每10章检查一次
+    if chapter % 10 == 0:
+        check_consistency()
 ```
 
 ## 各Skill独立调用

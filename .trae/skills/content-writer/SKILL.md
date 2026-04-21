@@ -219,10 +219,10 @@ description: "Writes full web novel content based on outlines, chapter plans, an
 ## 使用方式
 
 ```
-/content-writer --outline 大纲.json --chapter-range 1-10
-/content-writer --design 设计方案.json --outline 大纲.json --volume 1
-/content-writer --chapter 1 --style 快节奏 --word-count 2000
-/content-writer --batch --chapters 1-50 --auto-save
+skill_view(content-writer) --outline 大纲.json --chapter-range 1-10
+skill_view(content-writer) --design 设计方案.json --outline 大纲.json --volume 1
+skill_view(content-writer) --chapter 1 --style 快节奏 --word-count 2000
+skill_view(content-writer) --batch --chapters 1-50 --auto-save
 ```
 
 ## 写作质量保证

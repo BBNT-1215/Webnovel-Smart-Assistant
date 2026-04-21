@@ -109,23 +109,24 @@ description: "Audits web novel content for quality, consistency, pacing, excitem
 - **对话分段**: 对话是否独立成段
 - **节奏感**: 段落节奏是否符合网文规范
 
-### 6. AI写作问题审计
+### 6. 可读性评分（替代"AI痕迹检测"）
 
-#### 机器感检测
-- **对话机器人**: 所有对话是否符合人物身份，避免AI式生硬对话
-- **人物OOC**: 人物行为是否符合设定，避免性格突变
-- **设定一致性**: 设定是否前后一致，避免AI记忆不连贯导致的矛盾
-- **逻辑连贯性**: 情节逻辑是否连贯，避免隐形断层（如角色受伤后突然恢复）
+**说明**：读者不在乎内容是AI写的还是人工写的，只在乎好不好看。因此，关注点应放在内容质量而非"AI痕迹"。
 
-#### 重复性检测
-- **情节重复**: 是否有重复的情节或桥段
-- **表述重复**: 是否有重复的描述或表达方式
-- **爽点单一**: 爽点是否多样化，避免单一模式反复
+#### 可读性指标
+- **流畅度评分**: 文字是否通顺自然（0-10分）
+- **吸引力评分**: 内容是否让人想继续阅读（0-10分）
+- **代入感评分**: 读者是否能代入主角视角（0-10分）
+- **爽感评分**: 爽点是否真正让人感到爽（0-10分）
+- **人物立体度**: 人物是否有血有肉（0-10分）
+- **情节紧凑度**: 情节是否拖沓或跳跃（0-10分）
 
-#### 情感深度检测
-- **情感细节**: 是否缺乏细腻的情感描写（AI常见问题）
-- **人物动机**: 人物行为动机是否充分合理
-- **冲突深度**: 冲突是否有足够的深度和张力
+#### 问题类型（基于质量，而非来源）
+- **对话生硬**: 对话是否自然，符合人物身份
+- **描写空洞**: 描写是否有具体细节
+- **情节拖沓**: 是否有不必要的冗余内容
+- **情绪扁平**: 情感描写是否到位
+- **重复感**: 是否有重复的情节或表述
 
 ### 7. 市场适配审计
 
@@ -216,10 +217,10 @@ description: "Audits web novel content for quality, consistency, pacing, excitem
 ## 使用方式
 
 ```
-/content-auditor --chapters 1-50 --audit-type 全维度
-/content-auditor --chapter 15 --focus 情节审计
-/content-auditor --input 小说内容.txt --output 审计报告.json
-/content-auditor --quick-check --chapters 1-10
+skill_view(content-auditor) --chapters 1-50 --audit-type 全维度
+skill_view(content-auditor) --chapter 15 --focus 情节审计
+skill_view(content-auditor) --input 小说内容.txt --output 审计报告.json
+skill_view(content-auditor) --quick-check --chapters 1-10
 ```
 
 ## 审计级别

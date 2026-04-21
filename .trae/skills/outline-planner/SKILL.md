@@ -241,11 +241,13 @@ description: "Creates detailed web novel outlines including volume structure, ch
 
 ## 使用方式
 
+## 使用方式
+
 ```
-/outline-planner --design 设计方案.json --volumes 5 --chapters-per-volume 100
-/outline-planner --track 都市异能 --focus 第一卷大纲
-/outline-planner --input 设计清单.json --output 大纲.json
-/outline-planner --adjust-pacing --fast-start --volume 1
+skill_view(outline-planner) --design 设计方案.json --volumes 5 --chapters-per-volume 100
+skill_view(outline-planner) --track 都市异能 --focus 第一卷大纲
+skill_view(outline-planner) --input 设计清单.json --output 大纲.json
+skill_view(outline-planner) --adjust-pacing --fast-start --volume 1
 ```
 
 ## 大纲设计原则

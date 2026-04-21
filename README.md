@@ -1,148 +1,135 @@
 # 爆款网文创作全流程自动化工作流
 
-> **项目说明**: 本项目是一套**工作流设计文档**，包含 Trae Agent 技能定义文件（SKILL.md），而非可直接执行的代码项目。
-> 旨在为网文创作者提供从市场分析到内容创作的全流程方法论指导。
+> 基于 AI Agent 的网文创作系统，通过文件系统传递数据，实现从市场研究到最终优化的完整流程。
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue" alt="Version">
-  <img src="https://img.shields.io/badge/type-Design%20Document-orange" alt="Type">
+  <img src="https://img.shields.io/badge/version-2.0.0-blue" alt="Version">
+  <img src="https://img.shields.io/badge/platform-Trae%20Agent-orange" alt="Platform">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
 ## 📖 项目简介
 
-爆款网文创作全流程自动化工作流是一个基于AI的网文创作辅助系统，涵盖从平台数据抓取、选题分析、全维度设计、大纲规划、正文撰写、质量审计到文字优化的完整创作流程。系统旨在帮助创作者高效产出具备爆款潜力的高质量网文作品。
+本项目是一套**可实际执行的 AI Agent 工作流**，包含 8 个 SKILL.md 文件，定义了从市场研究到内容优化的完整创作流程。Agent 通过 WebSearch、文件读写等实际工具能力执行每个步骤，通过 `output/` 目录传递中间结果。
 
-### 核心特性
-
-- 🤖 **全自动化流程**：从数据到成品一键生成
-- 📈 **爆款导向**：遵循网文爆款写作规律
-- ✅ **质量保障**：多重审核与优化机制
-- 🚫 **AI去痕化**：消除AI生成痕迹，贴近人工创作
-- 🔧 **灵活调用**：支持单技能独立使用
-
-## 🏗️ 系统架构
+## 🏗️ 工作流架构
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    工作流控制器                              │
-├─────────────────────────────────────────────────────────────┤
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐       │
-│  │  数据抓取    │  │  选题分析   │  │  设计规划   │       │
-│  │data-scraper │  │topic-analyzer│ │design-planner│       │
-│  └─────────────┘  └─────────────┘  └─────────────┘       │
-│         │                 │                 │              │
-│         ▼                 ▼                 ▼              │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐       │
-│  │  大纲规划    │  │  正文撰写   │  │  内容审计   │       │
-│  │outline-planner│ │content-writer│ │content-auditor│      │
-│  └─────────────┘  └─────────────┘  └─────────────┘       │
-│         │                 │                 │              │
-│         └─────────────────┼─────────────────┘              │
-│                           ▼                                │
-│                    ┌─────────────┐                        │
-│                    │  文字优化   │                        │
-│                    │text-optimizer│                       │
-│                    └─────────────┘                        │
-└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│                         Phase 1: 市场研究                           │
+│  ┌─────────────────┐          ┌─────────────────┐                  │
+│  │  1.数据抓取      │ ─文件→   │  2.选题分析      │                  │
+│  │  WebSearch搜索  │          │  分析赛道机会    │                  │
+│  └─────────────────┘          └─────────────────┘                  │
+│         ↓                            ↓                             │
+│  output/platform_data.json    output/topic_report.json             │
+├─────────────────────────────────────────────────────────────────────┤
+│                         Phase 2: 设计规划                           │
+│  ┌─────────────────┐          ┌─────────────────┐                  │
+│  │  3.全维度设计    │ ─文件→   │  4.大纲规划      │                  │
+│  │  人物+世界观     │          │  卷纲+章纲       │                  │
+│  └─────────────────┘          └─────────────────┘                  │
+│         ↓                            ↓                             │
+│  output/design_plan.json      output/outline.json                  │
+│  output/characters_card.md                                         │
+├─────────────────────────────────────────────────────────────────────┤
+│                         Phase 3: 内容创作                           │
+│  ┌─────────────────┐          ┌─────────────────┐                  │
+│  │  5.正文撰写      │ ─文件→   │  6.内容审计      │                  │
+│  │  逐章生成        │          │  质量检查        │                  │
+│  └─────────────────┘          └─────────────────┘                  │
+│         ↓                            ↓                             │
+│  output/chapters/*.md         output/audit_report.json             │
+│  output/characters_card.md (更新)                                  │
+├─────────────────────────────────────────────────────────────────────┤
+│                         Phase 4: 优化                              │
+│  ┌─────────────────┐                                               │
+│  │  7.文字优化      │                                               │
+│  │  针对性修改      │                                               │
+│  └─────────────────┘                                               │
+│         ↓                                                          │
+│  output/chapters_optimized/*.md                                    │
+│  output/optimization_log.json                                      │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
-## 📦 包含的技能
+## 📦 包含的 Skill
 
-### Hermes Agent 版本
-| 技能名称 | 功能描述 | 用途 |
-|---------|---------|------|
-| `data-scraper` | 平台数据抓取 | 从各网文平台抓取热门作品、榜单、读者数据 |
-| `topic-analyzer` | 赛道选题分析 | 分析热门赛道、竞争格局、蓝海机会 |
-| `design-planner` | 全维度设计清单 | 人物设定、世界观、力量体系、金手指设计 |
-| `outline-planner` | 大纲规划 | 卷纲设计、章纲规划、节奏安排、爽点排布 |
-| `content-writer` | 全文撰写 | 根据大纲逐章撰写正文内容 |
-| `content-auditor` | 内容审计 | 质量检查、情节连贯性、人物一致性检测 |
-| `text-optimizer` | 文字优化 | 语句润色、节奏调整、爽点强化 |
-| `novel-workflow` | 工作流编排 | 串联所有Skill实现全流程自动化 |
-
-### OpenCLAW 版本
-所有技能同样提供 OpenCLAW 兼容版本，使用标准 JSON Schema 接口，便于与其他系统集成。
-
-| 技能名称 | OpenCLAW 文件 | 接口规范 |
-|---------|--------------|----------|
-| `data-scraper` | `openclaw_skill.json` | 标准 JSON Schema |
-| `topic-analyzer` | `openclaw_skill.json` | 标准 JSON Schema |
-| `design-planner` | `openclaw_skill.json` | 标准 JSON Schema |
-| `outline-planner` | `openclaw_skill.json` | 标准 JSON Schema |
-| `content-writer` | `openclaw_skill.json` | 标准 JSON Schema |
-| `content-auditor` | `openclaw_skill.json` | 标准 JSON Schema |
-| `text-optimizer` | `openclaw_skill.json` | 标准 JSON Schema |
-| `novel-workflow` | `openclaw_skill.json` | 标准 JSON Schema |
+| Skill | 输入 | 输出 | 能力 |
+|-------|------|------|------|
+| `data-scraper` | 无 | `platform_data.json` | 使用 WebSearch 搜索市场数据 |
+| `topic-analyzer` | `platform_data.json` | `topic_report.json` | 分析赛道热度、竞争、机会 |
+| `design-planner` | `topic_report.json` | `design_plan.json`<br>`characters_card.md` | 生成人物设定、世界观、力量体系 |
+| `outline-planner` | `design_plan.json` | `outline.json` | 生成卷纲、章纲、节奏安排 |
+| `content-writer` | `outline.json`<br>`design_plan.json`<br>`characters_card.md` | `chapters/`<br>`characters_card.md`(更新) | 逐章撰写正文 |
+| `content-auditor` | `chapters/`<br>`design_plan.json` | `audit_report.json` | 检查一致性、可读性、节奏 |
+| `text-optimizer` | `audit_report.json`<br>`chapters/` | `chapters_optimized/`<br>`optimization_log.json` | 针对性优化内容 |
+| `novel-workflow` | 用户输入 | 全部 | 串联全流程，自动执行 |
 
 ## 🚀 快速开始
 
-### 使用方式
+### 在 Trae Agent 中使用
 
-> **注意**: 本项目为设计文档，非可执行代码。以下为 Trae Agent 中调用 skill 的方式说明。
+#### 方式一：执行完整工作流
+Agent 会自动执行所有 7 个步骤，在关键节点暂停等待用户确认。
 
-#### 1. 在 Trae Agent 中使用
+#### 方式二：分步执行
+用户可以单独调用任意 skill 执行特定步骤。
+
+### 输出文件结构
+
 ```
-skill_view(novel-workflow) --mode semi-auto --platforms 起点,番茄 --track 都市 --volumes 2
+output/
+├── platform_data.json          # 市场数据
+├── topic_report.json           # 选题报告
+├── design_plan.json            # 设计方案
+├── characters_card.md          # 人物卡片（持续更新）
+├── outline.json                # 完整大纲
+├── chapters/                   # 初稿章节
+│   ├── 第1章_章名.md
+│   └── ...
+├── audit_report.json           # 审计报告
+├── chapters_optimized/         # 优化后章节
+│   ├── 第1章_章名.md
+│   └── ...
+└── optimization_log.json       # 优化日志
 ```
 
-#### 2. 分步调用
-```
-skill_view(data-scraper) --platforms 起点,番茄,七猫 --data-type 全量数据
-skill_view(topic-analyzer) --data-source 平台数据.json --output-format 选题报告
-skill_view(design-planner) --input 选题报告.json --track 都市
-skill_view(outline-planner) --design 设计方案.json --volumes 2
-skill_view(content-writer) --outline 大纲.json --chapter-range 1-50
-skill_view(content-auditor) --chapters 1-50 --audit-type 全维度
-skill_view(text-optimizer) --chapters 1-50 --audit-report 审计报告.json --level 中度优化
-```
+## 🔧 关键技术设计
 
-## 📚 文档
+### 1. 文件系统数据流
+所有 skill 通过 `output/` 目录传递数据，形成完整流水线：
+- 每个 skill 有明确的输入和输出文件
+- 后续 skill 依赖前置 skill 的输出
+- 支持断点续传
 
-- [📖 使用手册](USAGE_GUIDE.md) - 详细的工作流使用说明
-- [⚙️ 技术配置文档](TECHNICAL_CONFIG.md) - 完整的技术架构和配置说明
-- [📦 技能包说明](SKILL_PACKAGE.md) - Hermes Agent技能包集成指南
-- [🔗 Hermes集成指南](HERMES_INTEGRATION_GUIDE.md) - 如何集成到Hermes Agent
-- [🔗 OpenCLAW集成指南](OPENCLAW_INTEGRATION_GUIDE.md) - 如何集成到OpenCLAW系统
+### 2. 一致性维护机制
+- **人物卡片**: 维护主角姓名、性格、外貌，每次写作前读取
+- **设定摘要**: 维护世界观、力量体系，防止设定矛盾
+- **每10章检查**: 定期检查人物一致性
 
-## 🎯 爆款质量保障
+### 3. API 调用策略
+- 每章单独调用，不一次生成多章
+- temperature: 0.7-0.8
+- max_new_tokens: 3000
+- 请求间隔 2-5 秒
 
-### 1. 市场导向机制
-- 实时分析热门题材和读者需求
-- 与同类作品对比，寻找差异化优势
-- 识别竞争相对较小但有潜力的蓝海赛道
+### 4. 用户交互点
+工作流在关键节点暂停：
+| 节点 | 交互内容 |
+|------|---------|
+| 选题分析后 | 选择最终赛道 |
+| 设计方案后 | 确认人物设定和世界观 |
+| 大纲规划后 | 确认章节结构 |
+| 每10章生成后 | 检查内容质量 |
+| 审计完成后 | 确认是否需要优化 |
 
-### 2. 质量控制机制
-- 专门检测和消除AI生成的典型痕迹
-- 确保人物行为、语言风格始终如一
-- 保证世界观、力量体系前后一致
+## ⚠️ 限制说明
 
-### 3. 爽点与节奏保障
-- 确保每3-5章有爽点，保持读者黏性
-- 快慢结合，张弛有度，避免审美疲劳
-- 每10-15章安排小高潮，每50-80章安排大高潮
-
-### 4. 迭代优化机制
-- 至少5轮质量优化，每轮聚焦不同问题
-- 自动识别问题并针对性优化
-- 质量闸门：未达标的章节自动重新优化
-
-## 📊 质量标准
-
-| 维度 | 最低要求 | 说明 |
-|-----|---------|------|
-| 整体评分 | ≥ 8.5分 | 满分10分 |
-| 节奏评分 | ≥ 8.0分 | 爽点密度、节奏变化 |
-| 人物评分 | ≥ 8.5分 | 一致性、个性化 |
-| AI痕迹评分 | ≤ 2.0分 | 越低越好 |
-
-## 🛠️ 技术栈
-
-- **编程语言**: Python 3.8+
-- **AI模型**: Transformer-based 文本生成模型
-- **数据处理**: Pandas, NumPy
-- **网络请求**: Requests, aiohttp
-- **配置管理**: PyYAML
+- **数据来源**: 通过 WebSearch 获取公开信息，无法获取平台内部精确数据
+- **反爬限制**: 起点、番茄等平台有严格反爬，只能获取有限公开信息
+- **内容质量**: AI 生成内容需要人工审核，不能直接发布
+- **读者偏好**: 读者只在乎内容好不好看，不在乎是否为 AI 生成
 
 ## 📁 项目结构
 
@@ -150,77 +137,34 @@ skill_view(text-optimizer) --chapters 1-50 --audit-report 审计报告.json --le
 Webnovel-Smart-Assistant/
 ├── .trae/
 │   └── skills/
-│       ├── data-scraper/           # 数据抓取技能
+│       ├── data-scraper/           # 数据抓取
 │       │   ├── SKILL.md
 │       │   ├── hermes_skill.json
 │       │   └── openclaw_skill.json
-│       ├── topic-analyzer/         # 选题分析技能
-│       │   ├── SKILL.md
-│       │   ├── hermes_skill.json
-│       │   └── openclaw_skill.json
-│       ├── design-planner/         # 设计规划技能
-│       │   ├── SKILL.md
-│       │   ├── hermes_skill.json
-│       │   └── openclaw_skill.json
-│       ├── outline-planner/        # 大纲规划技能
-│       │   ├── SKILL.md
-│       │   ├── hermes_skill.json
-│       │   └── openclaw_skill.json
-│       ├── content-writer/         # 内容撰写技能
-│       │   ├── SKILL.md
-│       │   ├── hermes_skill.json
-│       │   └── openclaw_skill.json
-│       ├── content-auditor/       # 内容审计技能
-│       │   ├── SKILL.md
-│       │   ├── hermes_skill.json
-│       │   └── openclaw_skill.json
-│       ├── text-optimizer/         # 文字优化技能
-│       │   ├── SKILL.md
-│       │   ├── hermes_skill.json
-│       │   └── openclaw_skill.json
-│       └── novel-workflow/         # 工作流编排技能
-│           ├── SKILL.md
-│           ├── hermes_skill.json
-│           └── openclaw_skill.json
+│       ├── topic-analyzer/         # 选题分析
+│       ├── design-planner/         # 设计规划
+│       ├── outline-planner/        # 大纲规划
+│       ├── content-writer/         # 内容撰写
+│       ├── content-auditor/        # 内容审计
+│       ├── text-optimizer/         # 文字优化
+│       └── novel-workflow/         # 工作流编排
 ├── USAGE_GUIDE.md                  # 使用手册
-├── TECHNICAL_CONFIG.md             # 技术配置文档
+├── TECHNICAL_CONFIG.md             # 技术配置
 ├── SKILL_PACKAGE.md                # 技能包说明
 ├── HERMES_INTEGRATION_GUIDE.md    # Hermes集成指南
 ├── OPENCLAW_INTEGRATION_GUIDE.md  # OpenCLAW集成指南
+├── 项目说明.md                     # 项目说明
+├── 审计报告.md                     # 审计报告
 └── README.md                       # 项目说明
 ```
 
 ## 🤝 贡献
 
-欢迎提交Issue和Pull Request！
+欢迎提交 Issue 和 Pull Request！
 
 ## 📄 许可证
 
 MIT License
-
-## ⚠️ 局限性说明
-
-> **重要**：在使用本项目前，请了解以下局限性：
-
-### 1. 项目性质
-- 本项目是**工作流设计文档**，不包含可执行代码
-- 技能定义文件（SKILL.md）为 Trae Agent 提供方法论指导
-- 实际效果取决于所使用的 LLM API 质量和提示词工程
-
-### 2. 数据源限制
-- 起点、番茄、七猫等平台有严格的反爬机制
-- 实际可获取的数据非常有限
-- 建议通过官方公开排行榜、行业报告等合法方式获取市场数据
-
-### 3. API 批量生成限制
-- LLM API 有速率限制，批量生成需控制请求频率
-- 长文本生成时可能存在主角名漂移、设定不一致等问题
-- 建议每章单独调用 API，并定期检一致性
-
-### 4. 内容质量
-- AI 生成的内容需要**人工深度润色**才能达到发布标准
-- 读者只在乎内容好不好看，不在乎是否为 AI 生成
-- 本项目关注可读性评分，而非"AI痕迹检测"
 
 ## 👤 作者
 
@@ -228,4 +172,4 @@ MIT License
 
 ---
 
-<p align="center">Made with ❤️ for web novel creators</p>
+<p align="center">AI Agent 驱动 · 文件系统数据流 · 完整创作流水线</p>

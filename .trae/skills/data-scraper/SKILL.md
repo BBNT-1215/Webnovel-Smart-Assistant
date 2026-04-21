@@ -1,110 +1,86 @@
 ---
 name: "data-scraper"
-description: "Provides web novel market research guidance and data collection strategies. Helps users understand platform data structures and effective scraping methodologies. Invoke when user needs platform data collection strategies or market research approaches."
+description: "Scrapes web novel platform data using web search and fetch tools to collect trending novels, rankings, and market trends. Invoke when user needs platform data collection, market research, or trending novel analysis."
 ---
 
-# 平台数据抓取指导 Skill
+# 平台数据抓取 Skill
 
 ## 功能概述
 
-本 skill 提供网文平台数据收集的指导和策略，帮助用户理解各平台数据结构和有效的数据收集方法。重点在于提供合规、高效的数据收集策略指导，而非直接执行抓取操作。
+本 skill 使用 AI Agent 的 WebSearch 和 WebFetch 工具，从各大网文平台抓取热门作品数据、榜单信息、市场趋势。
 
-## 触发条件
+## 执行步骤
 
-- 用户要求了解平台数据收集策略
-- 需要分析市场趋势和热门题材的数据来源
-- 需要获取平台数据收集的最佳实践
-- 工作流中市场研究阶段需要数据收集指导
+Agent 按以下步骤执行：
 
-## 数据收集策略指导
+### Step 1: 搜索热门榜单
+使用 WebSearch 搜索各平台的实时数据：
+```
+搜索关键词示例:
+- "起点中文网 月票榜 2026"
+- "番茄小说 热门小说排行"
+- "七猫小说 畅销榜 最新"
+- "2026年网文热门题材趋势"
+```
 
-### 1. 合规数据收集原则
-- **遵守robots.txt**: 严格遵循各平台的robots.txt协议
-- **频率控制**: 实施合理的请求间隔，避免对目标服务器造成压力
-- **用户代理**: 使用恰当的User-Agent标识
-- **数据用途**: 仅用于研究分析，不用于商业用途
+### Step 2: 获取详细数据
+使用 WebFetch 获取相关页面内容，提取：
+- 书名、作者、分类
+- 排名数据
+- 读者讨论热度
 
-### 2. 平台数据结构分析
-- **起点中文网**:
-  - 公开API接口：月票榜、推荐榜、新书榜
-  - 数据字段：书名、作者、分类、字数、收藏数、推荐票、评分
-  - 更新频率：榜单每小时更新一次
-
-- **番茄小说**:
-  - 公开数据：免费榜、新书榜、畅销榜
-  - 数据字段：书名、作者、分类、字数、阅读量、点赞数
-  - 特殊关注：免费模式下的数据指标
-
-- **七猫小说**:
-  - 公开数据：热门榜、新书榜、完结榜
-  - 数据字段：书名、作者、分类、字数、阅读数、分享数
-  - 广告模式数据特点
-
-### 3. 数据收集方法论
-- **官方API优先**: 优先使用平台提供的官方API
-- **公开数据利用**: 利用平台公开展示的数据
-- **第三方数据源**: 使用合法的第三方数据聚合服务
-- **用户调研**: 通过问卷等方式收集读者偏好数据
-
-### 4. 反爬应对策略
-- **IP轮换**: 使用代理IP池分散请求
-- **请求模拟**: 模拟真实用户浏览行为
-- **验证码处理**: 集成验证码识别服务
-- **延迟策略**: 实施智能延迟，避免被识别为爬虫
-
-## 实际可行的数据源
-
-### 1. 官方开放数据
-- **官方排行榜**: 各平台公布的排行榜数据
-- **作家公告**: 作者发布的创作计划和更新信息
-- **社区讨论**: 论坛、评论区的读者反馈数据
-
-### 2. 第三方聚合数据
-- **行业报告**: 艾瑞、QuestMobile等发布的网文行业报告
-- **数据聚合平台**: 合法的第三方数据聚合服务
-- **社交媒体**: 微博、知乎等平台的网文讨论数据
-
-### 3. 用户行为数据
-- **评论分析**: 分析读者评论中的偏好表达
-- **互动数据**: 收藏、推荐、打赏等互动行为数据
-- **阅读时长**: 分析不同类型内容的阅读完成率
+### Step 3: 整理数据
+将搜索到的数据整理为结构化格式，保存到文件。
 
 ## 输出格式
 
+将数据保存到 `output/platform_data.json`：
+
 ```json
 {
-  "research_time": "2026-04-21T14:00:00Z",
-  "data_collection_strategy": {
-    "platforms": ["起点中文网", "番茄小说", "七猫小说"],
-    "legal_sources": ["官方API", "公开排行榜", "第三方聚合"],
-    "collection_method": "合规数据收集策略",
-    "frequency": "每日更新",
-    "rate_limit": "每分钟10次请求"
+  "scrape_time": "当前时间",
+  "platforms": {
+    "起点中文网": {
+      "top_novels": [
+        {
+          "rank": 1,
+          "title": "书名",
+          "author": "作者",
+          "category": "分类",
+          "tags": ["标签"],
+          "description": "简介"
+        }
+      ]
+    },
+    "番茄小说": { ... }
   },
-  "market_insights": {
-    "hot_genres": ["都市", "玄幻", "仙侠"],
-    "trending_topics": ["系统流", "重生", "穿越"],
-    "reader_preferences": ["快节奏", "爽点密集", "情节紧凑"]
-  },
-  "compliance_notes": {
-    "terms_compliance": true,
-    "privacy_respect": true,
-    "fair_use_adherence": true
+  "trends": {
+    "hot_genres": ["热门题材"],
+    "emerging_tags": ["新兴标签"],
+    "market_notes": "市场趋势观察"
   }
 }
 ```
 
+## 数据源策略
+
+由于平台有反爬机制，采用以下策略：
+
+1. **搜索引擎聚合**: 通过 Google/Bing 搜索获取公开的排行信息
+2. **第三方数据站**: 获取合法的第三方聚合数据
+3. **社交媒体**: 从微博、知乎获取讨论热度数据
+4. **行业报告**: 搜索艾瑞、QuestMobile 等发布的报告
+
 ## 使用方式
 
-```
-skill_view(data-scraper) --platform 起点中文网 --data-type 榜单数据 --strategy 合规收集
-skill_view(data-scraper) --focus 市场趋势 --sources 第三方聚合
-skill_view(data-scraper) --method 反爬策略 --frequency 每日
-```
+用户调用此 skill 后，Agent 将：
+1. 执行 WebSearch 获取各平台热门作品数据
+2. 整理数据并保存到 `output/platform_data.json`
+3. 输出数据摘要给用户
 
-## 注意事项
+## 限制说明
 
-- 数据收集必须遵守各平台的服务条款
-- 不应尝试绕过平台的安全措施
-- 应尊重用户隐私和数据保护法规
-- 数据仅用于分析研究目的
+- 无法获取平台的内部数据（收藏数、订阅数等精确数字）
+- 数据来自公开搜索结果，可能不是最新
+- 反爬严重的平台（起点、番茄）只能获取有限的公开信息
+- 建议用户结合自己的手动调研补充数据

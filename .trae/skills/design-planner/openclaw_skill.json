@@ -1,0 +1,34 @@
+{
+  "name": "novel_design_planner",
+  "description": "Creates comprehensive design checklists for web novels including character design, world building, power systems, plot structure, and story elements. Invoke when user needs novel design planning, character creation, world building, or story element design.",
+  "instructions": [
+    "Based on the provided track and user preferences, create detailed character designs",
+    "Develop comprehensive world-building elements including setting and rules",
+    "Design balanced power systems with clear progression paths",
+    "Create plot structure with clear conflict and resolution arcs",
+    "Ensure all design elements align with the chosen track and target audience"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "track": {
+        "type": "string",
+        "enum": ["都市", "玄幻", "仙侠", "科幻", "悬疑", "历史", "游戏", "轻小说"],
+        "description": "Novel genre track"
+      },
+      "protagonist_name": {
+        "type": "string",
+        "description": "Protagonist name (optional)"
+      },
+      "focus_areas": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["人物设计", "世界观", "力量体系", "金手指", "情节架构"]
+        },
+        "description": "Focus areas for design"
+      }
+    },
+    "required": ["track"]
+  }
+}

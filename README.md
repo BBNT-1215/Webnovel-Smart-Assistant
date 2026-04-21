@@ -46,6 +46,7 @@
 
 ## 📦 包含的技能
 
+### Hermes Agent 版本
 | 技能名称 | 功能描述 | 用途 |
 |---------|---------|------|
 | `data-scraper` | 平台数据抓取 | 从各网文平台抓取热门作品、榜单、读者数据 |
@@ -56,6 +57,20 @@
 | `content-auditor` | 内容审计 | 质量检查、情节连贯性、人物一致性检测 |
 | `text-optimizer` | 文字优化 | 语句润色、节奏调整、爽点强化 |
 | `novel-workflow` | 工作流编排 | 串联所有Skill实现全流程自动化 |
+
+### OpenCLAW 版本
+所有技能同样提供 OpenCLAW 兼容版本，使用标准 JSON Schema 接口，便于与其他系统集成。
+
+| 技能名称 | OpenCLAW 文件 | 接口规范 |
+|---------|--------------|----------|
+| `data-scraper` | `openclaw_skill.json` | 标准 JSON Schema |
+| `topic-analyzer` | `openclaw_skill.json` | 标准 JSON Schema |
+| `design-planner` | `openclaw_skill.json` | 标准 JSON Schema |
+| `outline-planner` | `openclaw_skill.json` | 标准 JSON Schema |
+| `content-writer` | `openclaw_skill.json` | 标准 JSON Schema |
+| `content-auditor` | `openclaw_skill.json` | 标准 JSON Schema |
+| `text-optimizer` | `openclaw_skill.json` | 标准 JSON Schema |
+| `novel-workflow` | `openclaw_skill.json` | 标准 JSON Schema |
 
 ## 🚀 快速开始
 
@@ -107,6 +122,7 @@ pip install -r requirements.txt
 - [⚙️ 技术配置文档](TECHNICAL_CONFIG.md) - 完整的技术架构和配置说明
 - [📦 技能包说明](SKILL_PACKAGE.md) - Hermes Agent技能包集成指南
 - [🔗 Hermes集成指南](HERMES_INTEGRATION_GUIDE.md) - 如何集成到Hermes Agent
+- [🔗 OpenCLAW集成指南](OPENCLAW_INTEGRATION_GUIDE.md) - 如何集成到OpenCLAW系统
 
 ## 🎯 爆款质量保障
 
@@ -155,32 +171,41 @@ Webnovel-Smart-Assistant/
 │   └── skills/
 │       ├── data-scraper/           # 数据抓取技能
 │       │   ├── SKILL.md
-│       │   └── hermes_skill.json
+│       │   ├── hermes_skill.json
+│       │   └── openclaw_skill.json
 │       ├── topic-analyzer/         # 选题分析技能
 │       │   ├── SKILL.md
-│       │   └── hermes_skill.json
+│       │   ├── hermes_skill.json
+│       │   └── openclaw_skill.json
 │       ├── design-planner/         # 设计规划技能
 │       │   ├── SKILL.md
-│       │   └── hermes_skill.json
+│       │   ├── hermes_skill.json
+│       │   └── openclaw_skill.json
 │       ├── outline-planner/        # 大纲规划技能
 │       │   ├── SKILL.md
-│       │   └── hermes_skill.json
+│       │   ├── hermes_skill.json
+│       │   └── openclaw_skill.json
 │       ├── content-writer/         # 内容撰写技能
 │       │   ├── SKILL.md
-│       │   └── hermes_skill.json
+│       │   ├── hermes_skill.json
+│       │   └── openclaw_skill.json
 │       ├── content-auditor/       # 内容审计技能
 │       │   ├── SKILL.md
-│       │   └── hermes_skill.json
+│       │   ├── hermes_skill.json
+│       │   └── openclaw_skill.json
 │       ├── text-optimizer/         # 文字优化技能
 │       │   ├── SKILL.md
-│       │   └── hermes_skill.json
+│       │   ├── hermes_skill.json
+│       │   └── openclaw_skill.json
 │       └── novel-workflow/         # 工作流编排技能
 │           ├── SKILL.md
-│           └── hermes_skill.json
+│           ├── hermes_skill.json
+│           └── openclaw_skill.json
 ├── USAGE_GUIDE.md                  # 使用手册
 ├── TECHNICAL_CONFIG.md             # 技术配置文档
 ├── SKILL_PACKAGE.md                # 技能包说明
 ├── HERMES_INTEGRATION_GUIDE.md    # Hermes集成指南
+├── OPENCLAW_INTEGRATION_GUIDE.md  # OpenCLAW集成指南
 └── README.md                       # 项目说明
 ```
 

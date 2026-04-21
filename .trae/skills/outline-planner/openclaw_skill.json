@@ -1,0 +1,34 @@
+{
+  "name": "novel_outline_planner",
+  "description": "Creates detailed web novel outlines including volume structure, chapter breakdown, plot pacing, and arc planning. Invoke when user needs novel outline creation, chapter planning, or story structure design.",
+  "instructions": [
+    "Create a structured outline based on the provided design plan",
+    "Define volume structure with clear goals and climaxes for each volume",
+    "Plan chapter-by-chapter breakdown with specific events and character development",
+    "Implement proper pacing with well-distributed excitement points",
+    "Ensure the outline follows proven web novel structure and reader engagement patterns"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "design_plan": {
+        "type": "string",
+        "description": "Design plan file path or JSON data"
+      },
+      "volumes": {
+        "type": "integer",
+        "description": "Number of volumes, default 3"
+      },
+      "chapters_per_volume": {
+        "type": "integer",
+        "description": "Chapters per volume, default 100"
+      },
+      "pace_style": {
+        "type": "string",
+        "enum": ["fast_start", "balanced", "slow_build"],
+        "description": "Pacing style"
+      }
+    },
+    "required": ["design_plan"]
+  }
+}

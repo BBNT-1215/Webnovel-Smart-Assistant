@@ -1,0 +1,47 @@
+{
+  "name": "novel_workflow_orchestrator",
+  "description": "Orchestrates the complete web novel creation workflow from data scraping to final optimization. Chains all individual skills together for end-to-end automation. Invoke when user wants to run the full novel creation pipeline or automate the entire workflow.",
+  "instructions": [
+    "Coordinate the execution of all novel creation skills in the proper sequence",
+    "Manage data flow between different stages of the workflow",
+    "Monitor progress and quality at each stage",
+    "Handle errors and retries appropriately",
+    "Generate comprehensive reports on workflow execution and output quality"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "mode": {
+        "type": "string",
+        "enum": ["auto", "semi-auto", "manual", "incremental"],
+        "description": "Execution mode"
+      },
+      "platforms": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["起点中文网", "番茄小说", "七猫小说", "纵横中文网", "晋江文学城", "潇湘书院"]
+        },
+        "description": "Data scraping platforms"
+      },
+      "track": {
+        "type": "string",
+        "enum": ["都市", "玄幻", "仙侠", "科幻", "悬疑", "历史", "游戏", "轻小说"],
+        "description": "Selected genre track"
+      },
+      "volumes": {
+        "type": "integer",
+        "description": "Number of planned volumes, default 3"
+      },
+      "chapters_per_volume": {
+        "type": "integer",
+        "description": "Chapters per volume, default 100"
+      },
+      "quality_threshold": {
+        "type": "number",
+        "description": "Quality threshold, default 8.5"
+      }
+    },
+    "required": ["mode", "track"]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "novel_text_optimizer",
+  "description": "Optimizes web novel text for readability, pacing, excitement, and reader engagement. Rewrites sentences, enhances descriptions, improves dialogue, and adjusts pacing. Invoke when user needs text refinement, style improvement, or content polishing.",
+  "instructions": [
+    "Analyze the provided text for areas needing optimization",
+    "Improve sentence flow and readability while maintaining original meaning",
+    "Enhance descriptions and action sequences for better reader engagement",
+    "Optimize dialogue to sound more natural and character-specific",
+    "Adjust pacing to improve reader engagement and excitement distribution"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "chapters": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        },
+        "description": "Array of chapter numbers to optimize"
+      },
+      "optimization_level": {
+        "type": "string",
+        "enum": ["轻度优化", "中度优化", "重度优化"],
+        "description": "Level of optimization"
+      },
+      "focus_on": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["语句流畅", "描写优化", "对话改进", "节奏调整", "爽点强化"]
+        },
+        "description": "Focus areas for optimization"
+      },
+      "audit_report": {
+        "type": "string",
+        "description": "Audit report file path for targeted optimization"
+      }
+    },
+    "required": ["chapters"]
+  }
+}

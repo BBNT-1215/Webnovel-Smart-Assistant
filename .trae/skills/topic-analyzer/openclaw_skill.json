@@ -1,0 +1,30 @@
+{
+  "name": "novel_topic_analyzer",
+  "description": "Analyzes web novel market data to identify trending topics, track selection, and market opportunities. Invoke when user needs topic analysis, track selection, or market opportunity identification.",
+  "instructions": [
+    "Analyze the provided market data to identify trending topics and patterns",
+    "Evaluate competition levels in different tracks",
+    "Identify blue ocean opportunities with low competition and high demand",
+    "Provide detailed analysis of reader preferences and market gaps",
+    "Generate ranked recommendations for optimal track selection"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "data_source": {
+        "type": "string",
+        "description": "Market data source file path or JSON data"
+      },
+      "analysis_type": {
+        "type": "string",
+        "enum": ["全维度分析", "赛道对比", "蓝海分析", "趋势预测"],
+        "description": "Type of analysis to perform"
+      },
+      "top_tracks": {
+        "type": "integer",
+        "description": "Number of top tracks to return, default 5"
+      }
+    },
+    "required": ["data_source"]
+  }
+}
